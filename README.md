@@ -25,21 +25,15 @@ This project implements a **PC GUI-controlled attenuator** using:
 ### 1) Optimization Model (Python)
 The attenuator gain model is:
 
-\[
-gm = \frac{1}{\left(1 + \frac{R3 + Z_L}{R2}\right)R1 + (R3 + Z_L)}
-\]
+gm = 1 / [ (1 + (R3 + ZL)/R2) * R1 + (R3 + ZL) ]
 
 Target attenuation is converted to the target gain:
 
-\[
-gm_{target} = 10^{-G_{dB}/10}
-\]
+gm_target = 10^(-G_dB / 10)
 
 The script searches over bounded ranges of `R1` and `R3` and selects values minimizing:
 
-\[
-|gm - gm_{target}|
-\]
+error = | gm - gm_target |
 
 A coarse grid search is followed by a local refine search for better accuracy.
 
